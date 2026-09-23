@@ -1,0 +1,23 @@
+const board = document.getElementById("game-board");
+const movesDisplay = document.getElementById("moves");
+const timerDisplay = document.getElementById("timer");
+const resultDisplay = document.getElementById("result");
+const restartBtn = document.getElementById("restart-btn");
+
+let dimension = 150;
+let imgStart = Math.floor(Math.random() * 100) + 1;
+let cards = [];
+let firstCard = null;
+let secondCard = null;
+let lockBoard = false;
+let moves = 0;
+let matchedCount = 0;
+let seconds = 0;
+let timerInterval = null;
+
+const image = [];
+
+for (let i = imgStart; i <= imgStart + 7; i++) { 
+    images.push(`https://picsum.photos/seed/${i}/${dimension}/${dimension}`);
+}
+cards = [...images, ...images];
