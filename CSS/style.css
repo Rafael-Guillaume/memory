@@ -1,66 +1,75 @@
-body {
-    margin: auto;
-    text-align: center;
-    color: #ff0000;
-    font-family: Arial, sans-serif;
+:root{
+  --pink:#ff3fa4; --yellow:#ffd23f; --teal:#00d4b8; --purple:#8c52ff; --blue:#2ec4f1; --ink:#241b3a;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
-
-main {
-    margin: auto;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 50%;
-    background-color: #fd05f1;
-    background-image: linear-gradient(160deg, #eb0ab7 0%, #f209ac 53%);
-    border: 4px solid #046ca8;
-    border-radius: 10px;
-    height: 50vh;
-    padding: 20px;
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0; min-height:100%;
+  background:
+    radial-gradient(circle at 15% 10%, #fff07a55, transparent 40%),
+    radial-gradient(circle at 85% 90%, #ff3fa455, transparent 40%),
+    linear-gradient(135deg, #8c52ff, #2ec4f1 60%, #00d4b8);
+  font-family:'Fredoka', sans-serif; color:var(--ink);
+  display:flex; flex-direction:column; align-items:center; padding:24px 16px 48px;
 }
-
-button {
-    width: 200px;
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 20px;
-    background-color: rgb(160, 190, 101);
-    border: 2px solid #ff0f77;
+h1{
+  font-family:'Baloo 2', sans-serif; font-weight:800; font-size:clamp(2.2rem,7vw,3.4rem);
+  color:#fff; margin:6px 0 2px; text-align:center; transform:rotate(-2deg);
+  text-shadow:4px 4px 0 var(--pink), 8px 8px 0 rgba(0,0,0,.15);
+  letter-spacing:1px;
 }
-
-button:hover {
-    cursor: pointer;
-    animation: jelly 0.5s;
+.tagline{color:#fff; opacity:.9; font-size:1rem; margin-bottom:18px; transform:rotate(1deg);}
+.hud{
+  display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-bottom:18px;
 }
-
-button:focus {
-    outline: 3px solid #046ca8;
-    outline-offset: 2px;
+.pill{
+  background:#fff; border:4px solid var(--ink); border-radius:999px;
+  padding:8px 20px; font-family:'Baloo 2'; font-weight:700; font-size:1.05rem;
+  box-shadow:5px 5px 0 var(--ink); transform:rotate(-1deg);
 }
-
-@keyframes jelly {
-    0%, 100% { transform: scale(1, 1); }
-    25% { transform: scale(0.9, 1.1); }
-    50% { transform: scale(1.1, 0.9); }
-    75% { transform: scale(0.95, 1.05); }
+.pill:nth-child(2){transform:rotate(1.5deg); background:var(--yellow);}
+#restart-btn{
+  cursor:pointer; background:var(--pink); color:#fff; border:4px solid var(--ink);
+  border-radius:999px; padding:8px 22px; font-family:'Baloo 2'; font-weight:800; font-size:1.05rem;
+  box-shadow:5px 5px 0 var(--ink); transform:rotate(2deg); transition:transform .15s;
 }
+#restart-btn:hover{transform:rotate(0deg) scale(1.06);}
+#restart-btn:active{transform:translate(3px,3px); box-shadow:2px 2px 0 var(--ink);}
+#restart-btn:focus-visible, .card:focus-visible{outline:4px dashed #fff; outline-offset:3px;}
 
-#result-display {
-    padding: 10px;
-    font-size: 20px;
+#game-board{
+  display:grid; grid-template-columns:repeat(4, minmax(70px,90px));
+  gap:14px; perspective:800px; margin-top:6px;
 }
+@media (min-width:520px){ #game-board{grid-template-columns:repeat(4, 90px);} }
 
-#score {
-    margin-top: 20px;
+.card{
+  position:relative; width:100%; aspect-ratio:1/1; cursor:pointer;
+  background:repeating-linear-gradient(45deg, var(--purple), var(--purple) 10px, #7a3ff0 10px, #7a3ff0 20px);
+  border:4px solid var(--ink); border-radius:16px;
+  box-shadow:4px 4px 0 var(--ink);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.6rem; color:#fff; transition:transform .25s;
 }
-
-#score p {
-    font-size: 18px;
+.card::after{content:"❓"; filter:drop-shadow(1px 1px 0 var(--ink));}
+.card:hover{transform:translateY(-4px) rotate(-2deg);}
+.card img{
+  width:100%; height:100%; object-fit:cover; border-radius:11px;
+  animation:pop .25s ease;
 }
+.card:has(img)::after{content:"";}
+.card.matched{
+  background:var(--teal); animation:wiggle .5s ease;
+  box-shadow:4px 4px 0 var(--ink), 0 0 0 4px var(--yellow);
+}
+@keyframes pop{ from{transform:scale(.5) rotate(10deg); opacity:0;} to{transform:scale(1) rotate(0); opacity:1;} }
+@keyframes wiggle{ 0%,100%{transform:rotate(0);} 25%{transform:rotate(-6deg);} 75%{transform:rotate(6deg);} }
 
-#reset {
-    margin-top: 10px;
-    background-color: #046ca8;
-    color: rgb(134, 195, 215);
+#result{
+  margin-top:22px; min-height:2.2em; font-family:'Baloo 2'; font-weight:800;
+  font-size:1.4rem; color:#fff; text-align:center; text-shadow:3px 3px 0 var(--pink);
+}
+@media (prefers-reduced-motion: reduce){
+  .card, .card img, .card.matched, #restart-btn{animation:none !important; transition:none !important;}
 }

@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memoryryfifiloulou</title>
-    <link rel="stylesheet" href="CSS/style.css" />
-    <script defer src="JS/script.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>🧠 MEMOZAAAP! 🎉</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
-    <h1>COUCOU LE CUM DE TEYKOGOD</h1>
-    
+  <h1>MEMOZAAAP!</h1>
+  <p class="tagline">Retrouve les paires avant que ton cerveau fonde 🧠🔥</p>
+
+  <div class="hud">
+    <span class="pill" id="moves">Coups : 0</span>
+    <span class="pill" id="timer">Temps : 00:00</span>
+    <button id="restart-btn" type="button">🔁 Rejouer</button>
+  </div>
+
+  <div id="game-board"></div>
+  <div id="result" role="status" aria-live="polite"></div>
+
+  <script src="JS/script.js"></script>
 </body>
 </html>
